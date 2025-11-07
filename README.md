@@ -35,7 +35,7 @@ LocalStorage persistence for user session and profile data.
 
 ## Technologies Used
 
-React 18+
+React.js
 
 React Router DOM
 
