@@ -20,8 +20,7 @@ Built with React and modern web technologies, KaziConnect offers a seamless expe
 
 ## Author
 
-**Brian Muigai**  
-_Full Stack Developer_
+The bobberrs
 
 ---
 
@@ -316,8 +315,8 @@ Developed by:
 
 - Brian Muigai - Lead Developer
 - Everyone - Frontend Developer
-- \*Patrickson - UI/UX Designer
-- Ronnie- Q&A Engineer
+- everyone - UI/UX Designer
+- Everyone - Q&A Engineer
 
 ---
 
