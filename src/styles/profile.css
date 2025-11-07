@@ -1,0 +1,236 @@
+/* Profile Page Styles */
+.profile-page {
+  min-height: calc(100vh - 80px);
+  padding: 40px 20px;
+  background-color: var(--light-cream);
+}
+
+.profile-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  animation: fadeIn 0.6s ease;
+}
+
+.profile-header h1 {
+  font-size: 2.5rem;
+  color: var(--gray-900);
+  margin-bottom: 0.5rem;
+}
+
+.profile-header p {
+  color: var(--gray-700);
+  font-size: 1.1rem;
+  margin-bottom: 0;
+}
+
+/* Profile Form */
+.profile-form {
+  background-color: var(--white);
+  padding: 3rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  animation: slideUp 0.6s ease;
+}
+
+.profile-photo-section {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.profile-photo-placeholder {
+  width: 150px;
+  height: 150px;
+  background: linear-gradient(135deg, var(--primary-green), var(--dark-blue));
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.profile-photo-placeholder:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 107, 63, 0.3);
+}
+
+.profile-initials {
+  font-size: 4rem;
+  color: white;
+  font-weight: 700;
+}
+
+.photo-hint {
+  color: var(--gray-700);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* Form Sections */
+.form-section {
+  margin-bottom: 3rem;
+}
+
+.form-section h3 {
+  color: var(--primary-green);
+  font-size: 1.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--gray-200);
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: var(--gray-900);
+  font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group textarea {
+  padding: 14px;
+  border: 2px solid var(--gray-300);
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background-color: var(--white);
+  color: var(--gray-900);
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(0, 107, 63, 0.1);
+}
+
+.form-group small {
+  color: var(--gray-700);
+  font-size: 0.85rem;
+}
+
+.btn-submit {
+  width: 100%;
+  background-color: var(--primary-green);
+  color: white;
+  padding: 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn-submit:hover {
+  background-color: #005230;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 107, 63, 0.3);
+}
+
+/* Profile Tips */
+.profile-tips {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 16px;
+  margin-top: 2rem;
+  border-left: 4px solid var(--warm-orange);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.profile-tips h3 {
+  color: var(--warm-orange);
+  margin-bottom: 1rem;
+  font-size: 1.3rem;
+}
+
+.profile-tips ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.profile-tips li {
+  color: var(--gray-700);
+  padding: 0.5rem 0;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.profile-tips li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  color: var(--success);
+  font-weight: 700;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-form {
+    padding: 2rem;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .profile-header h1 {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-form {
+    padding: 1.5rem;
+  }
+
+  .profile-photo-placeholder {
+    width: 120px;
+    height: 120px;
+  }
+
+  .profile-initials {
+    font-size: 3rem;
+  }
+}

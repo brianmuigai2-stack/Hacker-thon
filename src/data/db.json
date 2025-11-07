@@ -1,0 +1,456 @@
+{
+  "organizers": [
+    {
+      "id": 1,
+      "name": "HopeWorks Foundation",
+      "type": "NGO",
+      "contact_email": "info@hopeworks.org",
+      "location": "Kibera, Nairobi"
+    },
+    {
+      "id": 2,
+      "name": "GreenCity Cleaners Ltd",
+      "type": "Private Company",
+      "contact_email": "jobs@greencitycleaners.co.ke",
+      "location": "Nairobi"
+    },
+    {
+      "id": 3,
+      "name": "BuildBetter Kenya",
+      "type": "NGO",
+      "contact_email": "projects@buildbetter.or.ke",
+      "location": "Mombasa"
+    },
+    {
+      "id": 4,
+      "name": "SwiftDeliveries Ltd",
+      "type": "Private Company",
+      "contact_email": "recruit@swiftdeliveries.co.ke",
+      "location": "Kisumu"
+    },
+    {
+      "id": 5,
+      "name": "HandsOn Africa",
+      "type": "NGO",
+      "contact_email": "volunteer@handsonafrica.org",
+      "location": "Nakuru"
+    },
+    {
+      "id": 6,
+      "name": "BrightWash Services",
+      "type": "Private Company",
+      "contact_email": "apply@brightwash.co.ke",
+      "location": "Eldoret"
+    },
+    {
+      "id": 7,
+      "name": "FeedTheFuture Initiative",
+      "type": "NGO",
+      "contact_email": "careers@feedfuture.org",
+      "location": "Machakos"
+    },
+    {
+      "id": 8,
+      "name": "UrbanBuild Contractors",
+      "type": "Private Company",
+      "contact_email": "jobs@urbanbuild.co.ke",
+      "location": "Nairobi"
+    },
+    {
+      "id": 9,
+      "name": "CleanStart Women",
+      "type": "NGO",
+      "contact_email": "info@cleanstartwomen.org",
+      "location": "Kibera, Nairobi"
+    },
+    {
+      "id": 10,
+      "name": "AquaLife Bottlers",
+      "type": "Private Company",
+      "contact_email": "hr@aqualifebottlers.co.ke",
+      "location": "Thika"
+    }
+  ],
+  "jobs": [
+    {
+      "id": 1,
+      "organizerId": 1,
+      "job_title": "Community Clean-Up Volunteer",
+      "description": "Assist with a one-day clean-up exercise in Kibera.",
+      "availability": "Open",
+      "compensation_ksh": 800,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-09 08:00 AM"
+    },
+    {
+      "id": 2,
+      "organizerId": 2,
+      "job_title": "Street Sweeping Assistant",
+      "description": "Join GreenCity Cleaners for a 3-day street cleaning task.",
+      "availability": "Open",
+      "compensation_ksh": 1000,
+      "duration": "3 Days",
+      "time_to_start": "2025-11-10 07:30 AM"
+    },
+    {
+      "id": 3,
+      "organizerId": 3,
+      "job_title": "Construction Helper",
+      "description": "Assist masons in a community water tank setup.",
+      "availability": "Closed",
+      "compensation_ksh": 2500,
+      "duration": "1 Week",
+      "time_to_start": "2025-11-15 08:00 AM"
+    },
+    {
+      "id": 4,
+      "organizerId": 4,
+      "job_title": "Delivery Rider Assistant",
+      "description": "Assist delivery riders in parcel sorting and loading.",
+      "availability": "Open",
+      "compensation_ksh": 1500,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-08 09:00 AM"
+    },
+    {
+      "id": 5,
+      "organizerId": 1,
+      "job_title": "Tree Planting Volunteer",
+      "description": "Participate in the Kibera tree planting drive.",
+      "availability": "Open",
+      "compensation_ksh": 700,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-12 08:30 AM"
+    },
+    {
+      "id": 6,
+      "organizerId": 5,
+      "job_title": "Food Packing Assistant",
+      "description": "Help pack relief food for vulnerable families.",
+      "availability": "Open",
+      "compensation_ksh": 900,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-09 09:00 AM"
+    },
+    {
+      "id": 7,
+      "organizerId": 6,
+      "job_title": "Laundry Attendant",
+      "description": "Support BrightWash in folding and sorting clean clothes.",
+      "availability": "Open",
+      "compensation_ksh": 1200,
+      "duration": "3 Days",
+      "time_to_start": "2025-11-11 07:00 AM"
+    },
+    {
+      "id": 8,
+      "organizerId": 7,
+      "job_title": "Farm Hand",
+      "description": "Assist with planting and watering vegetables at FeedTheFuture.",
+      "availability": "Open",
+      "compensation_ksh": 1500,
+      "duration": "4 Days",
+      "time_to_start": "2025-11-13 06:30 AM"
+    },
+    {
+      "id": 9,
+      "organizerId": 8,
+      "job_title": "Construction Site Cleaner",
+      "description": "Clean construction debris and assist site supervisors.",
+      "availability": "Open",
+      "compensation_ksh": 1000,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-09 08:00 AM"
+    },
+    {
+      "id": 10,
+      "organizerId": 9,
+      "job_title": "Clothes Sorting Volunteer",
+      "description": "Help CleanStart sort donated clothes for women in Kibera.",
+      "availability": "Open",
+      "compensation_ksh": 500,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-10 10:00 AM"
+    },
+    {
+      "id": 11,
+      "organizerId": 10,
+      "job_title": "Bottling Line Assistant",
+      "description": "Assist AquaLife Bottlers with loading and labeling bottles.",
+      "availability": "Open",
+      "compensation_ksh": 1600,
+      "duration": "3 Days",
+      "time_to_start": "2025-11-14 07:00 AM"
+    },
+    {
+      "id": 12,
+      "organizerId": 2,
+      "job_title": "Office Cleaner",
+      "description": "General cleaning duties at GreenCity Cleaners offices.",
+      "availability": "Open",
+      "compensation_ksh": 1000,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-09 08:00 AM"
+    },
+    {
+      "id": 13,
+      "organizerId": 5,
+      "job_title": "Kitchen Assistant",
+      "description": "Help prepare meals for outreach programs.",
+      "availability": "Open",
+      "compensation_ksh": 1100,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-11 08:30 AM"
+    },
+    {
+      "id": 14,
+      "organizerId": 6,
+      "job_title": "Car Wash Helper",
+      "description": "Assist with car washing and drying at BrightWash.",
+      "availability": "Open",
+      "compensation_ksh": 900,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-12 08:00 AM"
+    },
+    {
+      "id": 15,
+      "organizerId": 8,
+      "job_title": "Painting Assistant",
+      "description": "Support painters in preparing surfaces and mixing paint.",
+      "availability": "Open",
+      "compensation_ksh": 1800,
+      "duration": "3 Days",
+      "time_to_start": "2025-11-13 07:30 AM"
+    },
+    {
+      "id": 16,
+      "organizerId": 1,
+      "job_title": "Event Setup Crew",
+      "description": "Help set up tents, chairs, and equipment for a charity event.",
+      "availability": "Open",
+      "compensation_ksh": 900,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-15 06:30 AM"
+    },
+    {
+      "id": 17,
+      "organizerId": 7,
+      "job_title": "Seedling Planter",
+      "description": "Plant seedlings and water them in community farms.",
+      "availability": "Open",
+      "compensation_ksh": 800,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-16 07:00 AM"
+    },
+    {
+      "id": 18,
+      "organizerId": 9,
+      "job_title": "Child Care Assistant",
+      "description": "Help take care of children during women's empowerment training.",
+      "availability": "Open",
+      "compensation_ksh": 1000,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-17 09:00 AM"
+    },
+    {
+      "id": 19,
+      "organizerId": 4,
+      "job_title": "Loading Assistant",
+      "description": "Assist drivers in loading packages for city deliveries.",
+      "availability": "Open",
+      "compensation_ksh": 1400,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-18 07:00 AM"
+    },
+    {
+      "id": 20,
+      "organizerId": 3,
+      "job_title": "Construction Waste Sorter",
+      "description": "Sort recyclable waste materials at the site.",
+      "availability": "Open",
+      "compensation_ksh": 1000,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-19 08:00 AM"
+    },
+    {
+      "id": 21,
+      "organizerId": 8,
+      "job_title": "Tile Cleaning Crew",
+      "description": "Assist with cleaning and polishing tiles post-construction.",
+      "availability": "Open",
+      "compensation_ksh": 1200,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-20 07:00 AM"
+    },
+    {
+      "id": 22,
+      "organizerId": 10,
+      "job_title": "Warehouse Helper",
+      "description": "Organize products and help load trucks for deliveries.",
+      "availability": "Open",
+      "compensation_ksh": 1300,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-21 07:30 AM"
+    },
+    {
+      "id": 23,
+      "organizerId": 2,
+      "job_title": "Window Cleaner",
+      "description": "Assist with high-rise window cleaning.",
+      "availability": "Open",
+      "compensation_ksh": 1600,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-22 08:00 AM"
+    },
+    {
+      "id": 24,
+      "organizerId": 5,
+      "job_title": "Community Outreach Volunteer",
+      "description": "Distribute flyers and engage community members.",
+      "availability": "Open",
+      "compensation_ksh": 700,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-23 09:00 AM"
+    },
+    {
+      "id": 25,
+      "organizerId": 9,
+      "job_title": "Women's Training Setup Crew",
+      "description": "Help set up training materials and seating.",
+      "availability": "Open",
+      "compensation_ksh": 800,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-24 08:30 AM"
+    },
+    {
+      "id": 26,
+      "organizerId": 6,
+      "job_title": "Laundry Pick-up Assistant",
+      "description": "Collect and deliver clothes from clients' homes.",
+      "availability": "Open",
+      "compensation_ksh": 1000,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-25 08:00 AM"
+    },
+    {
+      "id": 27,
+      "organizerId": 7,
+      "job_title": "Farm Irrigation Helper",
+      "description": "Operate irrigation hoses and monitor watering schedule.",
+      "availability": "Open",
+      "compensation_ksh": 1300,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-26 06:00 AM"
+    },
+    {
+      "id": 28,
+      "organizerId": 4,
+      "job_title": "Package Sorting Assistant",
+      "description": "Sort packages according to delivery destinations.",
+      "availability": "Open",
+      "compensation_ksh": 1200,
+      "duration": "2 Days",
+      "time_to_start": "2025-11-27 07:00 AM"
+    },
+    {
+      "id": 29,
+      "organizerId": 3,
+      "job_title": "Cement Mixer Helper",
+      "description": "Assist workers with mixing cement at a project site.",
+      "availability": "Open",
+      "compensation_ksh": 1600,
+      "duration": "3 Days",
+      "time_to_start": "2025-11-28 08:00 AM"
+    },
+    {
+      "id": 30,
+      "organizerId": 10,
+      "job_title": "Factory Floor Cleaner",
+      "description": "Clean and mop factory floors after production shifts.",
+      "availability": "Open",
+      "compensation_ksh": 900,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-29 07:00 AM"
+    },
+    {
+      "id": 31,
+      "organizerId": 5,
+      "job_title": "Relief Distribution Assistant",
+      "description": "Help distribute donations to needy families.",
+      "availability": "Open",
+      "compensation_ksh": 800,
+      "duration": "1 Day",
+      "time_to_start": "2025-11-30 09:00 AM"
+    },
+    {
+      "id": 32,
+      "organizerId": 1,
+      "job_title": "Market Clean-up Volunteer",
+      "description": "Participate in cleaning local market areas in Kibera.",
+      "availability": "Open",
+      "compensation_ksh": 700,
+      "duration": "1 Day",
+      "time_to_start": "2025-12-01 08:00 AM"
+    },
+    {
+      "id": 33,
+      "organizerId": 8,
+      "job_title": "Cement Bag Loader",
+      "description": "Load and stack cement bags at construction sites.",
+      "availability": "Open",
+      "compensation_ksh": 1400,
+      "duration": "2 Days",
+      "time_to_start": "2025-12-02 07:30 AM"
+    },
+    {
+      "id": 34,
+      "organizerId": 6,
+      "job_title": "Laundry Delivery Helper",
+      "description": "Assist with deliveries to clients within Eldoret town.",
+      "availability": "Open",
+      "compensation_ksh": 1000,
+      "duration": "1 Day",
+      "time_to_start": "2025-12-03 09:00 AM"
+    },
+    {
+      "id": 35,
+      "organizerId": 9,
+      "job_title": "Sorting Donations Volunteer",
+      "description": "Sort and package donated goods for families.",
+      "availability": "Open",
+      "compensation_ksh": 600,
+      "duration": "1 Day",
+      "time_to_start": "2025-12-04 08:30 AM"
+    },
+    {
+      "id": 36,
+      "organizerId": 7,
+      "job_title": "Animal Feeding Helper",
+      "description": "Feed chickens and goats at community farm sites.",
+      "availability": "Open",
+      "compensation_ksh": 800,
+      "duration": "1 Day",
+      "time_to_start": "2025-12-05 07:00 AM"
+    },
+    {
+      "id": 37,
+      "organizerId": 10,
+      "job_title": "Packing Line Assistant",
+      "description": "Assist in packaging bottled water for delivery.",
+      "availability": "Open",
+      "compensation_ksh": 1100,
+      "duration": "2 Days",
+      "time_to_start": "2025-12-06 07:00 AM"
+    },
+    {
+      "id": 38,
+      "organizerId": 4,
+      "job_title": "Warehouse Cleaner",
+      "description": "Clean storage areas and arrange packages neatly.",
+      "availability": "Open",
+      "compensation_ksh": 1000,
+      "duration": "1 Day",
+      "time_to_start": "2025-12-07 08:00 AM"
+    }
+  ]
+}

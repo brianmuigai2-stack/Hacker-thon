@@ -1,0 +1,145 @@
+/* Navbar Styles */
+.navbar {
+  background-color: var(--white);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  padding: 1rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: background-color 0.3s ease;
+}
+
+.navbar.dark {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-logo {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  transition: transform 0.3s ease;
+}
+
+.navbar-logo:hover {
+  transform: scale(1.05);
+}
+
+.logo-text {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary-green);
+  line-height: 1.2;
+}
+
+.logo-subtitle {
+  font-size: 0.75rem;
+  color: var(--warm-orange);
+  font-style: italic;
+  letter-spacing: 1px;
+}
+
+.navbar-menu {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--gray-900);
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: var(--gray-100);
+  color: var(--primary-green);
+}
+
+.nav-btn {
+  background-color: var(--primary-green);
+  color: white;
+  padding: 10px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-btn:hover {
+  background-color: #005230;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 107, 63, 0.3);
+}
+
+.nav-btn.logout {
+  background-color: var(--accent-red);
+}
+
+.nav-btn.logout:hover {
+  background-color: #B71C1C;
+}
+
+.nav-username {
+  color: var(--gray-700);
+  font-weight: 500;
+  padding: 8px 12px;
+  background-color: var(--gray-100);
+  border-radius: 20px;
+}
+
+.theme-toggle {
+  background: none;
+  border: 2px solid var(--gray-300);
+  font-size: 1.5rem;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  border-color: var(--primary-green);
+  transform: rotate(20deg);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .navbar-menu {
+    gap: 0.75rem;
+  }
+
+  .nav-link, .nav-btn {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+
+  .logo-text {
+    font-size: 1.25rem;
+  }
+
+  .logo-subtitle {
+    font-size: 0.65rem;
+  }
+
+  .nav-username {
+    display: none;
+  }
+}
