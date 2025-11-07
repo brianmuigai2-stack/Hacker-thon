@@ -1,16 +1,128 @@
-# React + Vite
+JobLink Kenya
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Tafuta Kazi. Connect. Empower.
 
-Currently, two official plugins are available:
+JobLink Kenya is a React-based web application that connects job seekers with organizations offering short-term or low-skill opportunities. It focuses on bridging the unemployment gap by making job discovery, application, and posting easy and accessible — especially for Kenyan youth.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Features
+For Job Seekers
 
-## React Compiler
+Browse available jobs and view job details.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Save favorite job listings for later.
 
-## Expanding the ESLint configuration
+Apply to open positions directly from the app.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+Manage and edit your personal and professional profile.
+
+For Organizations
+
+Post new job opportunities through a simple form.
+
+Manage job availability (Open/Closed).
+
+View applications (placeholder for future backend integration).
+
+Additional Features
+
+Light/Dark theme toggle using React Context API.
+
+Responsive navigation with user-type based menus.
+
+LocalStorage persistence for user session and profile data.
+
+
+
+echnologies Used
+
+React 18+
+
+React Router DOM
+
+Context API
+
+CSS / Tailwind (optional for styling)
+
+LocalStorage (for persistence)
+
+
+Installation & Setup
+
+Clone the repository
+
+git clone https://github.com/your-username/joblink-kenya.git
+cd joblink-kenya
+
+Install dependencies
+
+npm install
+
+Run the development server
+
+npm run dev
+
+Build for production
+
+npm run build
+Usage
+
+Login / Signup:
+Users can register either as a job seeker or organization.
+
+For Job Seekers:
+Navigate to “Find Jobs,” view listings, apply, or save opportunities.
+
+For Organizations:
+Access “Dashboard” to post new jobs using the JobPostForm.
+
+Profile Management:
+Job seekers can edit their profile info (skills, experience, contact, etc.).
+
+Project Structure<br>
+src/<br>
+├── components/<br>
+│   ├── Navbar.jsx<br>
+│   ├── JobCard.jsx<br>
+│   ├── JobPostForm.jsx<br>
+│   ├── ProfileForm.jsx<br>
+│   ├── ThemeToggle.jsx<br>
+├── context/<br>
+│   └── ThemeContext.js<br>
+├── pages/<br>
+│   ├── HomePage.jsx<br>
+│   ├── LoginPage.jsx<br>
+│   ├── SignupPage.jsx<br>
+│   ├── ProfilePage.jsx<br>
+│   ├── JobListingsPage.jsx<br>
+│   ├── OrganisationDashboard.jsx<br>
+├── styles/<br>
+│   ├── navbar.css<br>
+│   └── app.css<br>
+└── App.js<br>
+Future Enhancements<br>
+
+Integration with backend (Node.js / Express + MongoDB)
+
+Real job posting and application storage
+
+Notifications for new job openings
+
+Profile photo upload functionality
+
+Role-based authentication and admin panel
+
+Contributors
+
+Developed by:
+
+Judy
+
+Patrick
+
+Ronny
+
+Tobijah
+
+Brian
+
+JobLink Kenya — Empowering youth through opportunity.
