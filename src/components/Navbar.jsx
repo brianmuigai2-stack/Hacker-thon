@@ -4,8 +4,8 @@ import { ThemeContext } from '../context/ThemeContext';
 import ThemeToggle from './ThemeToggle';
 import '../styles/navbar.css';
 
-const Navbar = ({ user, onLogout }) => {
-  const { theme } = useContext(ThemeContext);
+// const Navbar = ({ user, onLogout }) => {
+//   const { theme } = useContext(ThemeContext);
 
   return (
     <nav className={`navbar ${theme}`}>
