@@ -61,3 +61,25 @@ const JobCard = ({ job, organizer, userType }) => {
           </div>
         </div>
       </div> 
+      {userType === 'seeker' && job.availability === 'Open' && (
+        <div className="job-actions">
+          <button 
+            className={`btn-save ${isSaved ? 'saved' : ''}`}
+            onClick={handleSave}
+          >
+            {isSaved ? ' Saved' : ' Save Job'}
+          </button>
+          <button 
+            className={`btn-apply ${hasApplied ? 'applied' : ''}`}
+            onClick={handleApply}
+            disabled={hasApplied}
+          >
+            {hasApplied ? '✓ Applied' : 'Apply Now'}
+          </button>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default JobCard;
