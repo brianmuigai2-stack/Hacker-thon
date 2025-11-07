@@ -1,4 +1,4 @@
-/* 
+/* Global Styles */
 * {
   margin: 0;
   padding: 0;
@@ -6,7 +6,7 @@
 }
 
 :root {
-
+  /* Light Theme Colors */
   --primary-green: #006B3F;
   --accent-red: #D32F2F;
   --dark-blue: #1A237E;
@@ -177,4 +177,4 @@ a:hover {
   h3 {
     font-size: 1.25rem;
   }
-} 
+}
