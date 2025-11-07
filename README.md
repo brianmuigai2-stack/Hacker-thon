@@ -115,14 +115,14 @@ Role-based authentication and admin panel
 
 Developed by:
 
-Judy
+Judy Ogachi
 
-Patrick
+Patrickson Mungai
 
-Ronny
+Ronnie Kiiru
 
-Tobijah
+Tobijah Otieno
 
-Brian
+Brian Muigai
 
 JobLink Kenya — Empowering youth through opportunity.
