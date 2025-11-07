@@ -1,6 +1,6 @@
 # KaziConnect
 
-## Connecting Youth with Local Jobs 🇰
+## Connecting Youth with Local Jobs 
 
 KaziConnect is a modern React-based web platform that empowers Kenyan youth by bridging the gap between talent and opportunity. The application connects job seekers with employers offering short-term, freelance, and entry-level positions across Kenya.
 
