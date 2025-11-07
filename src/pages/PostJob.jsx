@@ -19,3 +19,26 @@ const JobPostForm = ({ onJobPosted }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+;
+    
+    // Create new job object
+    const newJob = {
+      id: Date.now(),
+      organizerId: JSON.parse(localStorage.getItem('joblink-user')).id,
+      ...jobData,
+      compensation_ksh: parseInt(jobData.compensation_ksh)
+    };
+
+    // In production, save to database
+    onJobPosted(newJob);
+    
+    // Reset form
+    setJobData({
+      job_title: '',
+      description: '',
+      compensation_ksh: '',
+      duration: '',
+      time_to_start: '',
+      availability: 'Open'
+    });
+    
