@@ -38,7 +38,6 @@ const OrganisationDashboard = ({ user }) => {
 
         <div className="dashboard-stats">
           <div className="stat-card">
-            <div className="stat-icon">📋</div>
             <div className="stat-info">
               <h3>{allJobs.length}</h3>
               <p>Total Jobs Posted</p>
@@ -46,7 +45,6 @@ const OrganisationDashboard = ({ user }) => {
           </div>
           
           <div className="stat-card">
-            <div className="stat-icon">✅</div>
             <div className="stat-info">
               <h3>{allJobs.filter(j => j.availability === 'Open').length}</h3>
               <p>Active Jobs</p>
@@ -54,7 +52,6 @@ const OrganisationDashboard = ({ user }) => {
           </div>
           
           <div className="stat-card">
-            <div className="stat-icon">👥</div>
             <div className="stat-info">
               <h3>0</h3>
               <p>Applications</p>
