@@ -1,10 +1,10 @@
-JobLink Kenya
+# JobLink Kenya
 
-Tafuta Kazi. Connect. Empower.
+## Tafuta Kazi. Connect. Empower.
 
 JobLink Kenya is a React-based web application that connects job seekers with organizations offering short-term or low-skill opportunities. It focuses on bridging the unemployment gap by making job discovery, application, and posting easy and accessible — especially for Kenyan youth.
 
-Features
+## Features
 For Job Seekers
 
 Browse available jobs and view job details.
@@ -15,7 +15,7 @@ Apply to open positions directly from the app.
 
 Manage and edit your personal and professional profile.
 
-For Organizations
+## For Organizations
 
 Post new job opportunities through a simple form.
 
@@ -23,7 +23,7 @@ Manage job availability (Open/Closed).
 
 View applications (placeholder for future backend integration).
 
-Additional Features
+## Additional Features
 
 Light/Dark theme toggle using React Context API.
 
@@ -33,7 +33,7 @@ LocalStorage persistence for user session and profile data.
 
 
 
-echnologies Used
+## Technologies Used
 
 React 18+
 
@@ -41,16 +41,16 @@ React Router DOM
 
 Context API
 
-CSS / Tailwind (optional for styling)
+CSS 
 
-LocalStorage (for persistence)
+LocalStorage 
 
 
-Installation & Setup
+## Installation & Setup
 
 Clone the repository
 
-git clone https://github.com/your-username/joblink-kenya.git
+git clone https://github.com/brianmuigai2-stack/Hacker-thon.git
 cd joblink-kenya
 
 Install dependencies
@@ -69,10 +69,10 @@ Usage
 Login / Signup:
 Users can register either as a job seeker or organization.
 
-For Job Seekers:
+## For Job Seekers:
 Navigate to “Find Jobs,” view listings, apply, or save opportunities.
 
-For Organizations:
+## For Organizations:
 Access “Dashboard” to post new jobs using the JobPostForm.
 
 Profile Management:
@@ -99,7 +99,7 @@ src/<br>
 │   ├── navbar.css<br>
 │   └── app.css<br>
 └── App.js<br>
-Future Enhancements<br>
+## Future Enhancements
 
 Integration with backend (Node.js / Express + MongoDB)
 
@@ -111,7 +111,7 @@ Profile photo upload functionality
 
 Role-based authentication and admin panel
 
-Contributors
+# Contributors
 
 Developed by:
 
