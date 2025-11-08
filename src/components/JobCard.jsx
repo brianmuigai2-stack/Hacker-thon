@@ -1,8 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { applyToJob, getApplicationsByUser, withdrawApplication } from '../services/jobService';
 
-const JobCard = ({ job, organizer, userType }) => {
+const JobCard = ({ job, organizer, userType, user }) => {
   const [isSaved, setIsSaved] = useState(false);
   const [hasApplied, setHasApplied] = useState(false);
+  const [applying, setApplying] = useState(false);
+
+  useEffect(() => {
+    if (user && userType === 'seeker') {
+      checkApplicationStatus();
+    }
+  }, [job.id, user]);
+
+  const checkApplicationStatus = async () => {
+    if (!user?.uid) return;
+    try {
+      const applications = await getApplicationsByUser(user.uid);
+      const applied = applications.some(app => app.jobId === job.id);
+      setHasApplied(applied);
+    } catch (error) {
+      console.error('Error checking application status:', error);
+    }
+  };
 
   const handleSave = () => {
     setIsSaved(!isSaved);
@@ -10,11 +29,39 @@ const JobCard = ({ job, organizer, userType }) => {
     alert(isSaved ? 'Job removed from saved list' : 'Job saved!');
   };
 
-  const handleApply = () => {
-    if (!hasApplied) {
-      setHasApplied(true);
-      alert(`Application submitted for ${job.job_title}!`);
-      // In production, submit application to database
+  const handleApply = async () => {
+    if (!hasApplied && user && !applying) {
+      setApplying(true);
+      try {
+        await applyToJob(job.id, user.uid, {
+          userName: user.name,
+          userEmail: user.email,
+          jobTitle: job.job_title,
+          organizerId: job.organizerId,
+          organizerName: job.organizerName || 'Organization'
+        });
+        setHasApplied(true);
+        alert(`Application submitted for ${job.job_title}!`);
+      } catch (error) {
+        alert('Error submitting application: ' + error.message);
+      }
+      setApplying(false);
+    }
+  };
+
+  const handleWithdraw = async () => {
+    if (hasApplied && user) {
+      try {
+        const applications = await getApplicationsByUser(user.uid);
+        const userApp = applications.find(app => app.jobId === job.id);
+        if (userApp) {
+          await withdrawApplication(userApp.id, job.id);
+          setHasApplied(false);
+          alert('Application withdrawn!');
+        }
+      } catch (error) {
+        alert('Error withdrawing application: ' + error.message);
+      }
     }
   };
 
@@ -37,8 +84,13 @@ const JobCard = ({ job, organizer, userType }) => {
           </div>
           
           <div className="info-item">
+            <span className="info-label">Category:</span>
+            <span className="info-value">{job.category || 'General'}</span>
+          </div>
+          
+          <div className="info-item">
             <span className="info-label">Location:</span>
-            <span className="info-value">{organizer?.location || 'N/A'}</span>
+            <span className="info-value">{job.location || organizer?.location || 'N/A'}</span>
           </div>
           
           <div className="info-item">
@@ -71,13 +123,33 @@ const JobCard = ({ job, organizer, userType }) => {
           >
             {isSaved ? ' Saved' : ' Save Job'}
           </button>
-          <button 
-            className={`btn-apply ${hasApplied ? 'applied' : ''}`}
-            onClick={handleApply}
-            disabled={hasApplied}
-          >
-            {hasApplied ? '✓ Applied' : 'Apply Now'}
-          </button>
+          {!hasApplied ? (
+            <button 
+              className="btn-apply"
+              onClick={handleApply}
+              disabled={applying}
+            >
+              {applying ? 'Applying...' : 'Apply Now'}
+            </button>
+          ) : (
+            <>
+              <button className="btn-applied" disabled>
+                ✓ Applied
+              </button>
+              <button 
+                className="btn-withdraw"
+                onClick={handleWithdraw}
+              >
+                Withdraw
+              </button>
+            </>
+          )}
+          
+          {job.applicationsCount > 0 && (
+            <span className="applications-count">
+              {job.applicationsCount} applicant{job.applicationsCount !== 1 ? 's' : ''}
+            </span>
+          )}
         </div>
       )}
     </div>

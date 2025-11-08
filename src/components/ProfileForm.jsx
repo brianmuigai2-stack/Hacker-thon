@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { updateUserProfile } from '../services/userService';
 
 const ProfileForm = ({ user }) => {
   const [profile, setProfile] = useState({
@@ -21,14 +22,18 @@ const ProfileForm = ({ user }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Save to localStorage for demo
-    const updatedUser = { ...user, ...profile };
-    localStorage.setItem('joblink-user', JSON.stringify(updatedUser));
-    setIsSaved(true);
-    setTimeout(() => setIsSaved(false), 3000);
-    alert('Profile updated successfully!');
+    try {
+      await updateUserProfile(user.uid, profile);
+      const updatedUser = { ...user, ...profile };
+      localStorage.setItem('joblink-user', JSON.stringify(updatedUser));
+      setIsSaved(true);
+      setTimeout(() => setIsSaved(false), 3000);
+      alert('Profile updated successfully!');
+    } catch (error) {
+      alert('Error updating profile: ' + error.message);
+    }
   };
 
   return (

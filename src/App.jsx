@@ -11,6 +11,7 @@ import SignupPage from './pages/SignupPage';
 import ProfilePage from './pages/ProfilePage';
 import JobListingsPage from './pages/JobListingsPage';
 import OrganisationDashboard from './pages/OrganisationDashboard';
+import ApplicationsPage from './pages/ApplicationsPage';
 import './App.css';
 
 function App() {
@@ -81,6 +82,10 @@ function App() {
             <Route 
               path="/dashboard" 
               element={user && user.type === 'organisation' ? <OrganisationDashboard user={user} /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/applications" 
+              element={user && user.type === 'seeker' ? <ApplicationsPage user={user} /> : <Navigate to="/login" />} 
             />
           </Routes>
         </div>

@@ -27,6 +27,7 @@ const Navbar = ({ user, onLogout }) => {
               {user.type === 'seeker' && (
                 <>
                   <Link to="/jobs" className="nav-link">Find Jobs</Link>
+                  <Link to="/applications" className="nav-link">My Applications</Link>
                   <Link to="/profile" className="nav-link">My Profile</Link>
                 </>
               )}

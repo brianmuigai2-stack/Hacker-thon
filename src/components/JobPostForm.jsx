@@ -1,15 +1,37 @@
-import React, { useState } from 'react';
-import { createJob } from '../services/jobService';
+import React, { useState, useEffect } from 'react';
+import { createJob, updateJob } from '../services/jobService';
 
-const JobPostForm = ({ onJobPosted }) => {
+const JobPostForm = ({ onJobPosted, editingJob }) => {
   const [jobData, setJobData] = useState({
     job_title: '',
     description: '',
+    category: '',
+    location: '',
     compensation_ksh: '',
     duration: '',
     time_to_start: '',
     availability: 'Open'
   });
+
+  const categories = [
+    'Construction', 'Delivery', 'Cleaning', 'Security', 'Hospitality',
+    'Agriculture', 'Manufacturing', 'Retail', 'Healthcare', 'Education'
+  ];
+
+  useEffect(() => {
+    if (editingJob) {
+      setJobData({
+        job_title: editingJob.job_title || '',
+        description: editingJob.description || '',
+        category: editingJob.category || '',
+        location: editingJob.location || '',
+        compensation_ksh: editingJob.compensation_ksh || '',
+        duration: editingJob.duration || '',
+        time_to_start: editingJob.time_to_start || '',
+        availability: editingJob.availability || 'Open'
+      });
+    }
+  }, [editingJob]);
 
   const handleChange = (e) => {
     setJobData({
@@ -22,33 +44,45 @@ const JobPostForm = ({ onJobPosted }) => {
     e.preventDefault();
     try {
       const user = JSON.parse(localStorage.getItem('joblink-user') || '{}');
-      const jobDoc = await createJob({
-        organizerId: user.uid,
-        organizerName: user.name,
-        ...jobData,
-        compensation_ksh: parseInt(jobData.compensation_ksh)
-      });
       
-      onJobPosted({ id: jobDoc.id, ...jobData });
+      if (editingJob) {
+        await updateJob(editingJob.id, {
+          ...jobData,
+          compensation_ksh: parseInt(jobData.compensation_ksh)
+        });
+        alert('Job updated successfully!');
+      } else {
+        await createJob({
+          organizerId: user.uid,
+          organizerName: user.name,
+          ...jobData,
+          compensation_ksh: parseInt(jobData.compensation_ksh)
+        });
+        alert('Job posted successfully!');
+      }
       
-      setJobData({
-        job_title: '',
-        description: '',
-        compensation_ksh: '',
-        duration: '',
-        time_to_start: '',
-        availability: 'Open'
-      });
+      onJobPosted();
       
-      alert('Job posted successfully!');
+      if (!editingJob) {
+        setJobData({
+          job_title: '',
+          description: '',
+          category: '',
+          location: '',
+          compensation_ksh: '',
+          duration: '',
+          time_to_start: '',
+          availability: 'Open'
+        });
+      }
     } catch (error) {
-      alert('Error posting job: ' + error.message);
+      alert(`Error ${editingJob ? 'updating' : 'posting'} job: ` + error.message);
     }
   };
 
   return (
     <form className="job-post-form" onSubmit={handleSubmit}>
-      <h2>Post a New Job</h2>
+      <h2>{editingJob ? 'Edit Job' : 'Post a New Job'}</h2>
 
       <div className="form-group">
         <label htmlFor="job_title">Job Title *</label>
@@ -74,6 +108,37 @@ const JobPostForm = ({ onJobPosted }) => {
           placeholder="Describe the job responsibilities and requirements..."
           required
         />
+      </div>
+
+      <div className="form-row">
+        <div className="form-group">
+          <label htmlFor="category">Category *</label>
+          <select
+            id="category"
+            name="category"
+            value={jobData.category}
+            onChange={handleChange}
+            required
+          >
+            <option value="">Select Category</option>
+            {categories.map(cat => (
+              <option key={cat} value={cat}>{cat}</option>
+            ))}
+          </select>
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="location">Location *</label>
+          <input
+            type="text"
+            id="location"
+            name="location"
+            value={jobData.location}
+            onChange={handleChange}
+            placeholder="e.g., Nairobi, Mombasa"
+            required
+          />
+        </div>
       </div>
 
       <div className="form-row">
@@ -134,7 +199,7 @@ const JobPostForm = ({ onJobPosted }) => {
       </div>
 
       <button type="submit" className="btn-submit">
-        Post Job
+        {editingJob ? 'Update Job' : 'Post Job'}
       </button>
     </form>
   );

@@ -1,0 +1,52 @@
+.applications-page {
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.applications-container h1 {
+  margin-bottom: 30px;
+  color: #1f2937;
+}
+
+.applications-list {
+  display: grid;
+  gap: 20px;
+}
+
+.application-card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  border-left: 4px solid #4f46e5;
+}
+
+.app-header {
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.app-header h3 {
+  margin: 0;
+  color: #1f2937;
+}
+
+.no-applications {
+  text-align: center;
+  padding: 40px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.no-applications a {
+  color: #4f46e5;
+  text-decoration: none;
+}
+
+.no-applications a:hover {
+  text-decoration: underline;
+}
