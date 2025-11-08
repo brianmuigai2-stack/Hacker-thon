@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { signUp } from '../services/authService';
 import '../styles/auth.css';
 
 const SignupPage = ({ onLogin }) => {
@@ -19,24 +20,19 @@ const SignupPage = ({ onLogin }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Create new user
-    const newUser = {
-      id: Date.now(),
-      ...formData,
-      type: userType
-    };
-
-    // Save to localStorage (mock database)
-    const existingUsers = JSON.parse(localStorage.getItem('joblink-users') || '[]');
-    existingUsers.push(newUser);
-    localStorage.setItem('joblink-users', JSON.stringify(existingUsers));
-
-    // Log in the user
-    onLogin(newUser);
-    navigate(userType === 'seeker' ? '/jobs' : '/dashboard');
+    try {
+      const user = await signUp(formData.email, formData.password, {
+        name: formData.name,
+        location: formData.location,
+        type: userType
+      });
+      onLogin({ uid: user.uid, ...formData, type: userType });
+      navigate(userType === 'seeker' ? '/jobs' : '/dashboard');
+    } catch (error) {
+      alert('Signup failed: ' + error.message);
+    }
   };
 
   return (

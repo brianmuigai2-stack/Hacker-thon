@@ -1,24 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import JobPostForm from '../components/JobPostForm';
 import JobCard from '../components/JobCard';
-import dbData from '../data/db.json';
+import { getJobsByOrganizer } from '../services/jobService';
 import '../styles/dashboard.css';
 
 const OrganisationDashboard = ({ user }) => {
-  const [postedJobs, setPostedJobs] = useState([]);
+  const [jobs, setJobs] = useState([]);
   const [showPostForm, setShowPostForm] = useState(false);
+  const [loading, setLoading] = useState(true);
 
-  // Mock: Get jobs for this organisation
-  const { jobs, organizers } = dbData;
-  const userOrganizer = organizers.find(org => org.name === user.name) || organizers[0];
-  const organisationJobs = jobs.filter(job => job.organizerId === userOrganizer.id);
+  useEffect(() => {
+    loadJobs();
+  }, [user.uid]);
 
-  const allJobs = [...organisationJobs, ...postedJobs];
+  const loadJobs = async () => {
+    try {
+      const userJobs = await getJobsByOrganizer(user.uid);
+      setJobs(userJobs);
+    } catch (error) {
+      console.error('Error loading jobs:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const handleJobPosted = (newJob) => {
-    setPostedJobs([newJob, ...postedJobs]);
+    setJobs([newJob, ...jobs]);
     setShowPostForm(false);
   };
+
+  if (loading) return <div>Loading...</div>;
 
   return (
     <div className="dashboard-page">
@@ -39,14 +50,14 @@ const OrganisationDashboard = ({ user }) => {
         <div className="dashboard-stats">
           <div className="stat-card">
             <div className="stat-info">
-              <h3>{allJobs.length}</h3>
+              <h3>{jobs.length}</h3>
               <p>Total Jobs Posted</p>
             </div>
           </div>
           
           <div className="stat-card">
             <div className="stat-info">
-              <h3>{allJobs.filter(j => j.availability === 'Open').length}</h3>
+              <h3>{jobs.filter(j => j.availability === 'Open').length}</h3>
               <p>Active Jobs</p>
             </div>
           </div>
@@ -68,13 +79,13 @@ const OrganisationDashboard = ({ user }) => {
         <div className="dashboard-jobs-section">
           <h2>Your Posted Jobs</h2>
           
-          {allJobs.length > 0 ? (
+          {jobs.length > 0 ? (
             <div className="jobs-grid">
-              {allJobs.map(job => (
+              {jobs.map(job => (
                 <JobCard 
                   key={job.id} 
                   job={job} 
-                  organizer={userOrganizer}
+                  organizer={{ name: user.name }}
                   userType="organisation"
                 />
               ))}

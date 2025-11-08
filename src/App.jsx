@@ -1,6 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
+import { onAuthChange } from './services/authService';
+import { doc, getDoc } from 'firebase/firestore';
+import { db } from './firebase';
 import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import LoginPage from './pages/LoginPage';
@@ -12,24 +15,25 @@ import './App.css';
 
 function App() {
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  // Check if user is logged in from localStorage on mount
-  React.useEffect(() => {
-    const savedUser = localStorage.getItem('joblink-user');
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
-    }
+  useEffect(() => {
+    const unsubscribe = onAuthChange(async (firebaseUser) => {
+      if (firebaseUser) {
+        const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
+        setUser({ uid: firebaseUser.uid, ...userDoc.data() });
+      } else {
+        setUser(null);
+      }
+      setLoading(false);
+    });
+    return unsubscribe;
   }, []);
 
-  const handleLogin = (userData) => {
-    setUser(userData);
-    localStorage.setItem('joblink-user', JSON.stringify(userData));
-  };
+  const handleLogin = (userData) => setUser(userData);
+  const handleLogout = () => setUser(null);
 
-  const handleLogout = () => {
-    setUser(null);
-    localStorage.removeItem('joblink-user');
-  };
+  if (loading) return <div>Loading...</div>;
 
   return (
     <ThemeProvider>

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { signIn } from '../services/authService';
 import '../styles/auth.css';
 
 const LoginPage = ({ onLogin }) => {
@@ -8,18 +9,18 @@ const LoginPage = ({ onLogin }) => {
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Mock authentication - check localStorage for existing users
-    const existingUsers = JSON.parse(localStorage.getItem('joblink-users') || '[]');
-    const user = existingUsers.find(u => u.email === email && u.type === userType);
-    
-    if (user && password) {
-      onLogin(user);
-      navigate(userType === 'seeker' ? '/jobs' : '/dashboard');
-    } else {
-      alert('Invalid credentials or user not found. Please sign up first.');
+    try {
+      const user = await signIn(email, password);
+      if (user.type === userType) {
+        onLogin(user);
+        navigate(userType === 'seeker' ? '/jobs' : '/dashboard');
+      } else {
+        alert('User type mismatch');
+      }
+    } catch (error) {
+      alert('Login failed: ' + error.message);
     }
   };
 

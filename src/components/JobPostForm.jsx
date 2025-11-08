@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { createJob } from '../services/jobService';
 
 const JobPostForm = ({ onJobPosted }) => {
   const [jobData, setJobData] = useState({
@@ -17,31 +18,32 @@ const JobPostForm = ({ onJobPosted }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    // Create new job object
-    const newJob = {
-      id: Date.now(),
-      organizerId: JSON.parse(localStorage.getItem('joblink-user')).id,
-      ...jobData,
-      compensation_ksh: parseInt(jobData.compensation_ksh)
-    };
-
-    // In production, save to database
-    onJobPosted(newJob);
-    
-    // Reset form
-    setJobData({
-      job_title: '',
-      description: '',
-      compensation_ksh: '',
-      duration: '',
-      time_to_start: '',
-      availability: 'Open'
-    });
-    
-    alert('Job posted successfully!');
+    try {
+      const user = JSON.parse(localStorage.getItem('joblink-user') || '{}');
+      const jobDoc = await createJob({
+        organizerId: user.uid,
+        organizerName: user.name,
+        ...jobData,
+        compensation_ksh: parseInt(jobData.compensation_ksh)
+      });
+      
+      onJobPosted({ id: jobDoc.id, ...jobData });
+      
+      setJobData({
+        job_title: '',
+        description: '',
+        compensation_ksh: '',
+        duration: '',
+        time_to_start: '',
+        availability: 'Open'
+      });
+      
+      alert('Job posted successfully!');
+    } catch (error) {
+      alert('Error posting job: ' + error.message);
+    }
   };
 
   return (
