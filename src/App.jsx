@@ -20,18 +20,38 @@ function App() {
   useEffect(() => {
     const unsubscribe = onAuthChange(async (firebaseUser) => {
       if (firebaseUser) {
-        const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
-        setUser({ uid: firebaseUser.uid, ...userDoc.data() });
+        try {
+          const userDoc = await getDoc(doc(db, 'users', firebaseUser.uid));
+          if (userDoc.exists()) {
+            const userData = { uid: firebaseUser.uid, ...userDoc.data() };
+            setUser(userData);
+            localStorage.setItem('joblink-user', JSON.stringify(userData));
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
       } else {
         setUser(null);
+        localStorage.removeItem('joblink-user');
       }
       setLoading(false);
     });
     return unsubscribe;
   }, []);
 
-  const handleLogin = (userData) => setUser(userData);
-  const handleLogout = () => setUser(null);
+  const handleLogin = (userData) => {
+    setUser(userData);
+    localStorage.setItem('joblink-user', JSON.stringify(userData));
+  };
+  
+  const handleLogout = async () => {
+    try {
+      const { logout } = await import('./services/authService');
+      await logout();
+    } catch (error) {
+      console.error('Logout error:', error);
+    }
+  };
 
   if (loading) return <div>Loading...</div>;
 
