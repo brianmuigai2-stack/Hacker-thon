@@ -270,6 +270,6 @@ const OrganisationDashboard = ({ user }) => {
       </div>
     </div>
   );
-};
+}
 
 export default OrganisationDashboard;
