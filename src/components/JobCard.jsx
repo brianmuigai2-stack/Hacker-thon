@@ -175,6 +175,6 @@ const JobCard = ({ job, organizer, userType, user }) => {
       )}
     </div>
   );
-};
+}
 
 export default JobCard;
