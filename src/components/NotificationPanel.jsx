@@ -82,7 +82,7 @@ const NotificationsPanel = ({ userId, isOpen, onClose }) => {
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default NotificationsPanel;

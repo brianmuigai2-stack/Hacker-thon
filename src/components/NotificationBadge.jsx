@@ -30,7 +30,7 @@ const NotificationBadge = ({ userId }) => {
     <span className="notification-badge">
       {unreadCount > 9 ? '9+' : unreadCount}
     </span>
-  );
+  )
 };
 
 export default NotificationBadge;
