@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { createJob, updateJob } from '../services/jobService';
+import MapPicker from './MapPicker';
 
 const JobPostForm = ({ onJobPosted, editingJob }) => {
   const [jobData, setJobData] = useState({
@@ -10,8 +11,11 @@ const JobPostForm = ({ onJobPosted, editingJob }) => {
     compensation_ksh: '',
     duration: '',
     time_to_start: '',
-    availability: 'Open'
+    availability: 'Open',
+    coordinates: null
   });
+
+  const [showMap, setShowMap] = useState(false);
 
   const categories = [
     'Construction', 'Delivery', 'Cleaning', 'Security', 'Hospitality',
@@ -28,8 +32,12 @@ const JobPostForm = ({ onJobPosted, editingJob }) => {
         compensation_ksh: editingJob.compensation_ksh || '',
         duration: editingJob.duration || '',
         time_to_start: editingJob.time_to_start || '',
-        availability: editingJob.availability || 'Open'
+        availability: editingJob.availability || 'Open',
+        coordinates: editingJob.coordinates || null
       });
+      if (editingJob.coordinates) {
+        setShowMap(true);
+      }
     }
   }, [editingJob]);
 
@@ -40,23 +48,34 @@ const JobPostForm = ({ onJobPosted, editingJob }) => {
     });
   };
 
+  const handleLocationSelect = (position) => {
+    setJobData({
+      ...jobData,
+      coordinates: {
+        lat: position.lat,
+        lng: position.lng
+      }
+    });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const user = JSON.parse(localStorage.getItem('joblink-user') || '{}');
       
+      const jobDataToSave = {
+        ...jobData,
+        compensation_ksh: parseInt(jobData.compensation_ksh)
+      };
+
       if (editingJob) {
-        await updateJob(editingJob.id, {
-          ...jobData,
-          compensation_ksh: parseInt(jobData.compensation_ksh)
-        });
+        await updateJob(editingJob.id, jobDataToSave);
         alert('Job updated successfully!');
       } else {
         await createJob({
           organizerId: user.uid,
           organizerName: user.name,
-          ...jobData,
-          compensation_ksh: parseInt(jobData.compensation_ksh)
+          ...jobDataToSave
         });
         alert('Job posted successfully!');
       }
@@ -72,8 +91,10 @@ const JobPostForm = ({ onJobPosted, editingJob }) => {
           compensation_ksh: '',
           duration: '',
           time_to_start: '',
-          availability: 'Open'
+          availability: 'Open',
+          coordinates: null
         });
+        setShowMap(false);
       }
     } catch (error) {
       alert(`Error ${editingJob ? 'updating' : 'posting'} job: ` + error.message);
@@ -140,6 +161,32 @@ const JobPostForm = ({ onJobPosted, editingJob }) => {
           />
         </div>
       </div>
+
+      <div className="form-group">
+        <label>
+          <input
+            type="checkbox"
+            checked={showMap}
+            onChange={(e) => setShowMap(e.target.checked)}
+          />
+          {' '}Add location on map
+        </label>
+      </div>
+
+      {showMap && (
+        <div className="form-group">
+          <label>Select Job Location on Map</label>
+          <MapPicker 
+            initialPosition={jobData.coordinates}
+            onLocationSelect={handleLocationSelect}
+          />
+          {jobData.coordinates && (
+            <p className="map-coordinates">
+              Selected: {jobData.coordinates.lat.toFixed(4)}, {jobData.coordinates.lng.toFixed(4)}
+            </p>
+          )}
+        </div>
+      )}
 
       <div className="form-row">
         <div className="form-group">

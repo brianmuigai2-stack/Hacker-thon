@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { applyToJob, getApplicationsByUser, withdrawApplication } from '../services/jobService';
+import MapPicker from './MapPicker';
 
 const JobCard = ({ job, organizer, userType, user }) => {
   const [isSaved, setIsSaved] = useState(false);
   const [hasApplied, setHasApplied] = useState(false);
   const [applying, setApplying] = useState(false);
+  const [showMap, setShowMap] = useState(false);
 
   useEffect(() => {
     if (user && userType === 'seeker') {
@@ -25,7 +27,6 @@ const JobCard = ({ job, organizer, userType, user }) => {
 
   const handleSave = () => {
     setIsSaved(!isSaved);
-    // In production, save to database
     alert(isSaved ? 'Job removed from saved list' : 'Job saved!');
   };
 
@@ -80,7 +81,7 @@ const JobCard = ({ job, organizer, userType, user }) => {
         <div className="job-info-grid">
           <div className="info-item">
             <span className="info-label">Organisation:</span>
-            <span className="info-value">{organizer?.name || 'N/A'}</span>
+            <span className="info-value">{organizer?.name || job.organizerName || 'N/A'}</span>
           </div>
           
           <div className="info-item">
@@ -113,6 +114,26 @@ const JobCard = ({ job, organizer, userType, user }) => {
             <span className="info-value">{organizer?.contact_email || 'N/A'}</span>
           </div>
         </div>
+
+        {job.coordinates && (
+          <div className="job-location-section">
+            <button 
+              className="view-map-btn"
+              onClick={() => setShowMap(!showMap)}
+            >
+             {showMap ? ' Hide Map' : ' View Location on Map'} map
+            </button>
+            
+            {showMap && (
+              <div className="job-map">
+                <MapPicker 
+                  initialPosition={job.coordinates}
+                  readOnly={true}
+                />
+              </div>
+            )}
+          </div>
+        )}
       </div>
 
       {userType === 'seeker' && job.availability === 'Open' && (
@@ -134,7 +155,7 @@ const JobCard = ({ job, organizer, userType, user }) => {
           ) : (
             <>
               <button className="btn-applied" disabled>
-                ✓ Applied
+                 Applied
               </button>
               <button 
                 className="btn-withdraw"

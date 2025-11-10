@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { updateUserProfile } from '../services/userService';
+import ImageUpload from './ImageUpload';
 
 const ProfileForm = ({ user }) => {
   const [profile, setProfile] = useState({
@@ -10,7 +11,8 @@ const ProfileForm = ({ user }) => {
     bio: user?.bio || '',
     skills: user?.skills || '',
     experience: user?.experience || '',
-    services: user?.services || ''
+    services: user?.services || '',
+    profileImage: user?.profileImage || ''
   });
 
   const [isSaved, setIsSaved] = useState(false);
@@ -20,6 +22,17 @@ const ProfileForm = ({ user }) => {
       ...profile,
       [e.target.name]: e.target.value
     });
+  };
+
+  const handleImageUploaded = (imageUrl) => {
+    setProfile({
+      ...profile,
+      profileImage: imageUrl
+    });
+    
+    // Update localStorage immediately
+    const updatedUser = { ...user, profileImage: imageUrl };
+    localStorage.setItem('joblink-user', JSON.stringify(updatedUser));
   };
 
   const handleSubmit = async (e) => {
@@ -39,10 +52,11 @@ const ProfileForm = ({ user }) => {
   return (
     <form className="profile-form" onSubmit={handleSubmit}>
       <div className="profile-photo-section">
-        <div className="profile-photo-placeholder">
-          <span className="profile-initials">{profile.name.charAt(0) || 'U'}</span>
-        </div>
-        <p className="photo-hint">Click to upload photo (placeholder)</p>
+        <ImageUpload 
+          userId={user.uid}
+          currentImage={profile.profileImage}
+          onImageUploaded={handleImageUploaded}
+        />
       </div>
 
       <div className="form-section">
@@ -159,7 +173,7 @@ const ProfileForm = ({ user }) => {
       </div>
 
       <button type="submit" className="btn-submit">
-        {isSaved ? '✓ Profile Saved!' : 'Save Profile'}
+        {isSaved ? ' Profile Saved!' : 'Save Profile'}
       </button>
     </form>
   );

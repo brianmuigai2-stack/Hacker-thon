@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import JobPostForm from '../components/JobPostForm';
 import JobCard from '../components/JobCard';
-import { getJobsByOrganizer, getApplicationsByJob, updateApplicationStatus, deleteJob, updateJob } from '../services/jobService';
-import { getUserProfile } from '../services/userService';
+import { getJobsByOrganizer, getApplicationsByJob, updateApplicationStatus, deleteJob } from '../services/jobService';
+import { sendApplicationStatusNotification } from '../services/notificationService';
 import '../styles/dashboard.css';
 import '../styles/search.css';
 
@@ -13,6 +13,8 @@ const OrganisationDashboard = ({ user }) => {
   const [showApplications, setShowApplications] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [statusMessage, setStatusMessage] = useState('');
+  const [updatingAppId, setUpdatingAppId] = useState(null);
 
   useEffect(() => {
     loadJobs();
@@ -45,18 +47,43 @@ const OrganisationDashboard = ({ user }) => {
     }
   };
 
-  const handleStatusUpdate = async (appId, status) => {
+  const handleStatusUpdate = async (appId, status, app) => {
+    setUpdatingAppId(appId);
+    
+    let message = '';
+    if (status === 'accepted' || status === 'rejected') {
+      message = prompt(
+        `${status === 'accepted' ? 'Accepting' : 'Rejecting'} application from ${app.userName}.\n\nAdd an optional message for the applicant:`
+      );
+      
+      // If user cancels the prompt, don't proceed
+      if (message === null) {
+        setUpdatingAppId(null);
+        return;
+      }
+    }
+
     try {
       await updateApplicationStatus(appId, status);
+      
+      // Send notification to the applicant
+      await sendApplicationStatusNotification(
+        app.userId,
+        app.jobTitle,
+        status,
+        message
+      );
+      
       loadApplications();
-      alert(`Application ${status}!`);
+      alert(`Application ${status}! Notification sent to applicant.`);
     } catch (error) {
       alert('Error updating status: ' + error.message);
+    } finally {
+      setUpdatingAppId(null);
     }
   };
 
-  const handleJobPosted = (newJob) => {
-    setJobs([newJob, ...jobs]);
+  const handleJobPosted = () => {
     setShowPostForm(false);
     loadJobs();
   };
@@ -67,7 +94,7 @@ const OrganisationDashboard = ({ user }) => {
   };
 
   const handleDeleteJob = async (jobId) => {
-    if (confirm('Are you sure you want to delete this job?')) {
+    if (window.confirm('Are you sure you want to delete this job?')) {
       try {
         await deleteJob(jobId);
         loadJobs();
@@ -85,7 +112,7 @@ const OrganisationDashboard = ({ user }) => {
     loadJobs();
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return <div className="loading">Loading...</div>;
 
   return (
     <div className="dashboard-page">
@@ -100,11 +127,14 @@ const OrganisationDashboard = ({ user }) => {
               className="btn-secondary"
               onClick={() => setShowApplications(!showApplications)}
             >
-              {showApplications ? 'Hide Applications' : 'View Applications'}
+              {showApplications ? 'Hide Applications' : `View Applications (${applications.length})`}
             </button>
             <button 
               className="btn-post-job"
-              onClick={() => setShowPostForm(!showPostForm)}
+              onClick={() => {
+                setEditingJob(null);
+                setShowPostForm(!showPostForm);
+              }}
             >
               {showPostForm ? '✕ Cancel' : '+ Post New Job'}
             </button>
@@ -129,7 +159,14 @@ const OrganisationDashboard = ({ user }) => {
           <div className="stat-card">
             <div className="stat-info">
               <h3>{applications.length}</h3>
-              <p>Applications</p>
+              <p>Total Applications</p>
+            </div>
+          </div>
+
+          <div className="stat-card">
+            <div className="stat-info">
+              <h3>{applications.filter(a => a.status === 'pending').length}</h3>
+              <p>Pending Reviews</p>
             </div>
           </div>
         </div>
@@ -152,25 +189,30 @@ const OrganisationDashboard = ({ user }) => {
                   <div key={app.id} className="application-item">
                     <div className="app-info">
                       <h4>{app.userName}</h4>
-                      <p>Applied for: {app.jobTitle}</p>
-                      <p>Email: {app.userEmail}</p>
-                      <p>Applied: {app.appliedAt?.seconds ? new Date(app.appliedAt.seconds * 1000).toLocaleDateString() : new Date(app.appliedAt).toLocaleDateString()}</p>
+                      <p><strong>Applied for:</strong> {app.jobTitle}</p>
+                      <p><strong>Email:</strong> {app.userEmail}</p>
+                      <p><strong>Applied:</strong> {app.appliedAt?.seconds 
+                        ? new Date(app.appliedAt.seconds * 1000).toLocaleDateString() 
+                        : new Date(app.appliedAt).toLocaleDateString()}
+                      </p>
                     </div>
                     <div className="app-actions">
                       <span className={`status ${app.status}`}>{app.status}</span>
                       {app.status === 'pending' && (
                         <>
                           <button 
-                            onClick={() => handleStatusUpdate(app.id, 'accepted')}
+                            onClick={() => handleStatusUpdate(app.id, 'accepted', app)}
                             className="btn-accept"
+                            disabled={updatingAppId === app.id}
                           >
-                            Accept
+                            {updatingAppId === app.id ? 'Processing...' : 'Accept'}
                           </button>
                           <button 
-                            onClick={() => handleStatusUpdate(app.id, 'rejected')}
+                            onClick={() => handleStatusUpdate(app.id, 'rejected', app)}
                             className="btn-reject"
+                            disabled={updatingAppId === app.id}
                           >
-                            Reject
+                            {updatingAppId === app.id ? 'Processing...' : 'Reject'}
                           </button>
                         </>
                       )}
@@ -201,13 +243,13 @@ const OrganisationDashboard = ({ user }) => {
                       onClick={() => handleEditJob(job)}
                       className="btn-edit"
                     >
-                      Edit
+                       Edit
                     </button>
                     <button 
                       onClick={() => handleDeleteJob(job.id)}
                       className="btn-delete"
                     >
-                      Delete
+                       Delete
                     </button>
                   </div>
                 </div>

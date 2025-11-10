@@ -182,6 +182,139 @@
   color: var(--success);
   font-weight: 700;
 }
+/* Image Upload Styles */
+.image-upload {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.image-preview {
+  width: 150px;
+  height: 150px;
+  margin: 0 auto 1rem;
+  border-radius: 50%;
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  border: 4px solid var(--primary-green);
+  transition: all 0.3s ease;
+}
+
+.image-preview:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 24px rgba(0, 107, 63, 0.3);
+}
+
+.preview-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.placeholder-avatar {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, var(--primary-green), var(--dark-blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+.upload-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.upload-btn {
+  background-color: var(--primary-green);
+  color: white;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.upload-btn:hover:not(:disabled) {
+  background-color: #005230;
+  transform: translateY(-2px);
+}
+
+.upload-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Map Styles */
+.map-picker {
+  margin: 1rem 0;
+}
+
+.map-hint {
+  text-align: center;
+  color: var(--gray-700);
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.map-coordinates {
+  text-align: center;
+  color: var(--primary-green);
+  font-weight: 600;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.job-location-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 2px solid var(--gray-200);
+}
+
+.view-map-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: var(--warm-orange);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 1rem;
+}
+
+.view-map-btn:hover {
+  background-color: #E65100;
+  transform: translateY(-2px);
+}
+
+.job-map {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Leaflet map custom styles */
+.leaflet-container {
+  font-family: inherit;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 8px;
+}
 
 /* Animations */
 @keyframes fadeIn {
