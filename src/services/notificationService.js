@@ -93,5 +93,5 @@ export const sendApplicationStatusNotification = async (
     message: messages[status],
     additionalMessage,
     jobTitle
-  });
-};
+  })
+}
