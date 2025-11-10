@@ -17,7 +17,7 @@ const NotificationsPanel = ({ userId, isOpen, onClose }) => {
     setLoading(true);
     try {
       const notifs = await getUserNotifications(userId);
-      console.log('📱 Notifications loaded in panel:', notifs);
+      console.log('Notifications loaded in panel:', notifs);
       
       // Log each notification's additionalMessage specifically
       notifs.forEach((notif, index) => {
