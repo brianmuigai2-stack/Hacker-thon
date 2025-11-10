@@ -63,7 +63,6 @@ const ImageUpload = ({ userId, currentImage, onImageUploaded }) => {
           <img src={preview} alt="Profile" className="preview-image" />
         ) : (
           <div className="placeholder-avatar">
-            <span></span>
           </div>
         )}
         {uploading && (
