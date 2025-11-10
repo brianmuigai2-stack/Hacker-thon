@@ -54,4 +54,4 @@ const MapPicker = ({ initialPosition, onLocationSelect, readOnly = false }) => {
   );
 };
 
-export default MapPicker;
+export default MapPicker
