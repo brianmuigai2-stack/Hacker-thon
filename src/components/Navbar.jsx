@@ -37,7 +37,7 @@ const Navbar = ({ user, onLogout }) => {
                       className="nav-link notification-btn"
                       onClick={() => setShowNotifications(!showNotifications)}
                     >
-                      Notification
+                      🔔
                       <NotificationBadge userId={user.uid} />
                     </button>
                   </>
