@@ -13,7 +13,6 @@ const OrganisationDashboard = ({ user }) => {
   const [showApplications, setShowApplications] = useState(false);
   const [editingJob, setEditingJob] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [statusMessage, setStatusMessage] = useState('');
   const [updatingAppId, setUpdatingAppId] = useState(null);
 
   useEffect(() => {
@@ -48,36 +47,82 @@ const OrganisationDashboard = ({ user }) => {
   };
 
   const handleStatusUpdate = async (appId, status, app) => {
+    console.log('Starting status update process for:', {
+      appId,
+      status,
+      applicant: app.userName,
+      userId: app.userId
+    });
+
     setUpdatingAppId(appId);
     
-    let message = '';
-    if (status === 'accepted' || status === 'rejected') {
-      message = prompt(
-        `${status === 'accepted' ? 'Accepting' : 'Rejecting'} application from ${app.userName}.\n\nAdd an optional message for the applicant:`
-      );
-      
-      // If user cancels the prompt, don't proceed
-      if (message === null) {
-        setUpdatingAppId(null);
-        return;
-      }
+    // Show prompt for additional message
+    const promptMessage = status === 'accepted' 
+      ? `Accepting application from ${app.userName}\n\nWould you like to add a message? (e.g., "Please call us at 0712345678" or "Start date is Nov 15th")`
+      : `Rejecting application from ${app.userName}\n\nWould you like to add a message? (e.g., "Thank you for applying" or "We'll keep your info for future opportunities")`;
+    
+    const userInput = prompt(promptMessage);
+    
+    console.log('User input received:', {
+      userInput,
+      isNull: userInput === null,
+      isEmpty: userInput === '',
+      type: typeof userInput
+    });
+    
+    // If user cancels, don't proceed
+    if (userInput === null) {
+      console.log('User cancelled the prompt');
+      setUpdatingAppId(null);
+      return;
     }
+    
+    // Process the message - even if empty
+    const additionalMessage = userInput.trim();
+    
+    console.log('Processed message:', {
+      original: userInput,
+      trimmed: additionalMessage,
+      isEmpty: additionalMessage === '',
+      length: additionalMessage.length
+    });
 
     try {
+      // Step 1: Update application status in database
+      console.log('Updating application status in database...');
       await updateApplicationStatus(appId, status);
+      console.log('Application status updated');
       
-      // Send notification to the applicant
+      // Step 2: Send notification with the message
+      console.log('Sending notification with data:', {
+        userId: app.userId,
+        jobTitle: app.jobTitle,
+        status: status,
+        additionalMessage: additionalMessage,
+        hasMessage: additionalMessage !== ''
+      });
+      
       await sendApplicationStatusNotification(
         app.userId,
         app.jobTitle,
         status,
-        message
+        additionalMessage
       );
       
-      loadApplications();
-      alert(`Application ${status}! Notification sent to applicant.`);
+      console.log('Notification sent successfully');
+      
+      // Step 3: Reload applications
+      await loadApplications();
+      
+      // Step 4: Show success message
+      if (additionalMessage !== '') {
+        alert(`Application ${status}!\n\n Notification sent to ${app.userName} with your message:\n"${additionalMessage}"`);
+      } else {
+        alert(`Application ${status}!\n\n Notification sent to ${app.userName}.`);
+      }
     } catch (error) {
-      alert('Error updating status: ' + error.message);
+      console.error('Error in status update process:', error);
+      alert('Error updating application: ' + error.message);
     } finally {
       setUpdatingAppId(null);
     }
@@ -205,14 +250,14 @@ const OrganisationDashboard = ({ user }) => {
                             className="btn-accept"
                             disabled={updatingAppId === app.id}
                           >
-                            {updatingAppId === app.id ? 'Processing...' : 'Accept'}
+                            {updatingAppId === app.id ? ' Processing...' : ' Accept'}
                           </button>
                           <button 
                             onClick={() => handleStatusUpdate(app.id, 'rejected', app)}
                             className="btn-reject"
                             disabled={updatingAppId === app.id}
                           >
-                            {updatingAppId === app.id ? 'Processing...' : 'Reject'}
+                            {updatingAppId === app.id ? ' Processing...' : ' Reject'}
                           </button>
                         </>
                       )}
@@ -270,6 +315,6 @@ const OrganisationDashboard = ({ user }) => {
       </div>
     </div>
   );
-}
+};
 
 export default OrganisationDashboard;
