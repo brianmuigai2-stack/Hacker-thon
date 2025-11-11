@@ -5,70 +5,80 @@
       "name": "HopeWorks Foundation",
       "type": "NGO",
       "contact_email": "info@hopeworks.org",
-      "location": "Kibera, Nairobi"
+      "location": "Kibera, Nairobi",
+      "coordinates": { "lat": -1.3133, "lng": 36.7892 }
     },
     {
       "id": 2,
       "name": "GreenCity Cleaners Ltd",
       "type": "Private Company",
       "contact_email": "jobs@greencitycleaners.co.ke",
-      "location": "Nairobi"
+      "location": "Nairobi",
+      "coordinates": { "lat": -1.2921, "lng": 36.8219 }
     },
     {
       "id": 3,
       "name": "BuildBetter Kenya",
       "type": "NGO",
       "contact_email": "projects@buildbetter.or.ke",
-      "location": "Mombasa"
+      "location": "Mombasa",
+      "coordinates": { "lat": -4.0435, "lng": 39.6682 }
     },
     {
       "id": 4,
       "name": "SwiftDeliveries Ltd",
       "type": "Private Company",
       "contact_email": "recruit@swiftdeliveries.co.ke",
-      "location": "Kisumu"
+      "location": "Kisumu",
+      "coordinates": { "lat": -0.0917, "lng": 34.7680 }
     },
     {
       "id": 5,
       "name": "HandsOn Africa",
       "type": "NGO",
       "contact_email": "volunteer@handsonafrica.org",
-      "location": "Nakuru"
+      "location": "Nakuru",
+      "coordinates": { "lat": -0.3031, "lng": 36.0800 }
     },
     {
       "id": 6,
       "name": "BrightWash Services",
       "type": "Private Company",
       "contact_email": "apply@brightwash.co.ke",
-      "location": "Eldoret"
+      "location": "Eldoret",
+      "coordinates": { "lat": 0.5143, "lng": 35.2698 }
     },
     {
       "id": 7,
       "name": "FeedTheFuture Initiative",
       "type": "NGO",
       "contact_email": "careers@feedfuture.org",
-      "location": "Machakos"
+      "location": "Machakos",
+      "coordinates": { "lat": -1.5177, "lng": 37.2634 }
     },
     {
       "id": 8,
       "name": "UrbanBuild Contractors",
       "type": "Private Company",
       "contact_email": "jobs@urbanbuild.co.ke",
-      "location": "Nairobi"
+      "location": "Nairobi",
+      "coordinates": { "lat": -1.2864, "lng": 36.8172 }
     },
     {
       "id": 9,
       "name": "CleanStart Women",
       "type": "NGO",
       "contact_email": "info@cleanstartwomen.org",
-      "location": "Kibera, Nairobi"
+      "location": "Kibera, Nairobi",
+      "coordinates": { "lat": -1.3128, "lng": 36.7856 }
     },
     {
       "id": 10,
       "name": "AquaLife Bottlers",
       "type": "Private Company",
       "contact_email": "hr@aqualifebottlers.co.ke",
-      "location": "Thika"
+      "location": "Thika",
+      "coordinates": { "lat": -1.0332, "lng": 37.0692 }
     }
   ],
   "jobs": [
@@ -77,50 +87,65 @@
       "organizerId": 1,
       "job_title": "Community Clean-Up Volunteer",
       "description": "Assist with a one-day clean-up exercise in Kibera.",
+      "category": "Cleaning",
+      "location": "Kibera, Nairobi",
       "availability": "Open",
       "compensation_ksh": 800,
       "duration": "1 Day",
-      "time_to_start": "2025-11-09 08:00 AM"
+      "time_to_start": "2025-11-09 08:00 AM",
+      "coordinates": { "lat": -1.3140, "lng": 36.7895 }
     },
     {
       "id": 2,
       "organizerId": 2,
       "job_title": "Street Sweeping Assistant",
       "description": "Join GreenCity Cleaners for a 3-day street cleaning task.",
+      "category": "Cleaning",
+      "location": "Westlands, Nairobi",
       "availability": "Open",
       "compensation_ksh": 1000,
       "duration": "3 Days",
-      "time_to_start": "2025-11-10 07:30 AM"
+      "time_to_start": "2025-11-10 07:30 AM",
+      "coordinates": { "lat": -1.2676, "lng": 36.8108 }
     },
     {
       "id": 3,
       "organizerId": 3,
       "job_title": "Construction Helper",
       "description": "Assist masons in a community water tank setup.",
+      "category": "Construction",
+      "location": "Nyali, Mombasa",
       "availability": "Closed",
       "compensation_ksh": 2500,
       "duration": "1 Week",
-      "time_to_start": "2025-11-15 08:00 AM"
+      "time_to_start": "2025-11-15 08:00 AM",
+      "coordinates": { "lat": -4.0126, "lng": 39.7280 }
     },
     {
       "id": 4,
       "organizerId": 4,
       "job_title": "Delivery Rider Assistant",
       "description": "Assist delivery riders in parcel sorting and loading.",
+      "category": "Delivery",
+      "location": "Kondele, Kisumu",
       "availability": "Open",
       "compensation_ksh": 1500,
       "duration": "2 Days",
-      "time_to_start": "2025-11-08 09:00 AM"
+      "time_to_start": "2025-11-08 09:00 AM",
+      "coordinates": { "lat": -0.1022, "lng": 34.7617 }
     },
     {
       "id": 5,
       "organizerId": 1,
       "job_title": "Tree Planting Volunteer",
       "description": "Participate in the Kibera tree planting drive.",
+      "category": "Agriculture",
+      "location": "Olympic Estate, Nairobi",
       "availability": "Open",
       "compensation_ksh": 700,
       "duration": "1 Day",
-      "time_to_start": "2025-11-12 08:30 AM"
+      "time_to_start": "2025-11-12 08:30 AM",
+      "coordinates": { "lat": -1.3201, "lng": 36.7834 }
     },
     {
       "id": 6,
