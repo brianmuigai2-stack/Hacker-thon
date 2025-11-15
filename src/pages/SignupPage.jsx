@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp, signInWithGoogle, handleGoogleRedirectResult } from '../services/authService';
+import { signUp, signInWithGoogle } from '../services/authService';
 import { validateEmailStrength } from '../utils/emailValidator';
 import '../styles/auth.css';
 
@@ -58,27 +58,13 @@ const SignupPage = ({ onLogin }) => {
 
   const handleGoogleSignUp = async () => {
     try {
-      await signInWithGoogle(userType);
+      const user = await signInWithGoogle(userType);
+      onLogin(user);
+      navigate(userType === 'seeker' ? '/jobs' : '/dashboard');
     } catch (error) {
       alert('Google sign-up failed: ' + error.message);
     }
   };
-
-  React.useEffect(() => {
-    const handleRedirect = async () => {
-      try {
-        const user = await handleGoogleRedirectResult();
-        if (user) {
-          onLogin(user);
-          navigate(user.type === 'seeker' ? '/jobs' : '/dashboard');
-        }
-      } catch (error) {
-        console.error('Google redirect error:', error);
-        alert('Google sign-up failed: ' + error.message);
-      }
-    };
-    handleRedirect();
-  }, []);
 
   return (
     <div className="auth-page">

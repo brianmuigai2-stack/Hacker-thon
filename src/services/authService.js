@@ -4,8 +4,7 @@ import {
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
-  signInWithRedirect,
-  getRedirectResult,
+  signInWithPopup,
   sendPasswordResetEmail
 } from 'firebase/auth';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
@@ -31,17 +30,8 @@ export const logout = () => signOut(auth);
 
 export const signInWithGoogle = async (userType) => {
   const provider = new GoogleAuthProvider();
-  localStorage.setItem('google-signin-usertype', userType);
-  await signInWithRedirect(auth, provider);
-};
-
-export const handleGoogleRedirectResult = async () => {
-  const result = await getRedirectResult(auth);
-  if (!result) return null;
-  
+  const result = await signInWithPopup(auth, provider);
   const user = result.user;
-  const userType = localStorage.getItem('google-signin-usertype') || 'seeker';
-  localStorage.removeItem('google-signin-usertype');
   
   // Validate email domain
   const { validateEmailStrength } = await import('../utils/emailValidator');
