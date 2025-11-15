@@ -177,10 +177,36 @@
   transition: all 0.2s ease;
 }
 
-.btn-google:hover {
+.btn-google:hover:not(:disabled) {
   border-color: #d1d5db;
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
   transform: translateY(-1px);
+}
+
+.btn-google:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-submit:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  background: #9ca3af;
+}
+
+.btn-google .loading-container {
+  padding: 0;
+  margin: 0;
+}
+
+.btn-google .loading-spinner {
+  width: 20px;
+  height: 20px;
+}
+
+.btn-google .spinner-ring {
+  border-width: 2px;
 }
 
 .btn-google:active {

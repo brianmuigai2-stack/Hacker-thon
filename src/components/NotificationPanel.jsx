@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { getUserNotifications, markNotificationAsRead } from '../services/notificationService';
+import LoadingSpinner from './LoadingSpinner';
 import '../styles/notification.css';
 
 const NotificationsPanel = ({ userId, isOpen, onClose }) => {
@@ -53,7 +54,7 @@ const NotificationsPanel = ({ userId, isOpen, onClose }) => {
 
         <div className="notifications-list">
           {loading ? (
-            <div className="loading">Loading notifications...</div>
+            <LoadingSpinner size="medium" text="Loading notifications..." />
           ) : notifications.length > 0 ? (
             notifications.map(notif => {
               // Debug each notification as it renders

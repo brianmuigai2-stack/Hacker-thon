@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import JobPostForm from '../components/JobPostForm';
 import JobCard from '../components/JobCard';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { getJobsByOrganizer, getApplicationsByJob, updateApplicationStatus, deleteJob } from '../services/jobService';
 import { sendApplicationStatusNotification } from '../services/notificationService';
 import '../styles/dashboard.css';
@@ -157,7 +158,7 @@ const OrganisationDashboard = ({ user }) => {
     loadJobs();
   };
 
-  if (loading) return <div className="loading">Loading...</div>;
+  if (loading) return <LoadingSpinner size="large" text="Loading your dashboard..." />;
 
   return (
     <div className="dashboard-page">

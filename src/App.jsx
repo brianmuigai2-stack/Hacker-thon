@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage';
 import JobListingsPage from './pages/JobListingsPage';
 import OrganisationDashboard from './pages/OrganisationDashboard';
 import ApplicationsPage from './pages/ApplicationsPage';
+import LoadingSpinner from './components/LoadingSpinner';
 import './App.css';
 
 function App() {
@@ -54,7 +55,17 @@ function App() {
     }
   };
 
-  if (loading) return <div>Loading...</div>;
+  if (loading) return (
+    <div style={{ 
+      display: 'flex', 
+      alignItems: 'center', 
+      justifyContent: 'center', 
+      minHeight: '100vh',
+      background: 'linear-gradient(135deg, #f9fafb 0%, #e5e7eb 100%)'
+    }}>
+      <LoadingSpinner size="large" text="Loading KaziConnect..." />
+    </div>
+  );
 
   return (
     <ThemeProvider>
