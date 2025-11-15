@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { updateUserProfile } from '../services/userService';
 import ImageUpload from './ImageUpload';
 
-const ProfileForm = ({ user }) => {
+const ProfileForm = ({ user, updateUser }) => {
   const [profile, setProfile] = useState({
     name: user?.name || '',
     age: user?.age || '',
@@ -30,17 +30,15 @@ const ProfileForm = ({ user }) => {
       profileImage: imageUrl
     });
     
-    // Update localStorage immediately
-    const updatedUser = { ...user, profileImage: imageUrl };
-    localStorage.setItem('joblink-user', JSON.stringify(updatedUser));
+    // Update user data immediately
+    updateUser({ profileImage: imageUrl });
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await updateUserProfile(user.uid, profile);
-      const updatedUser = { ...user, ...profile };
-      localStorage.setItem('joblink-user', JSON.stringify(updatedUser));
+      updateUser(profile);
       setIsSaved(true);
       setTimeout(() => setIsSaved(false), 3000);
       alert('Profile updated successfully!');

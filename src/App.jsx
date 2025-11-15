@@ -12,6 +12,7 @@ import ProfilePage from './pages/ProfilePage';
 import JobListingsPage from './pages/JobListingsPage';
 import OrganisationDashboard from './pages/OrganisationDashboard';
 import ApplicationsPage from './pages/ApplicationsPage';
+import CommunityPage from './pages/CommunityPage';
 import LoadingSpinner from './components/LoadingSpinner';
 import './App.css';
 
@@ -31,6 +32,11 @@ function App() {
           }
         } catch (error) {
           console.error('Error fetching user data:', error);
+          // Fallback to localStorage if Firestore fails
+          const cachedUser = localStorage.getItem('joblink-user');
+          if (cachedUser) {
+            setUser(JSON.parse(cachedUser));
+          }
         }
       } else {
         setUser(null);
@@ -44,6 +50,13 @@ function App() {
   const handleLogin = (userData) => {
     setUser(userData);
     localStorage.setItem('joblink-user', JSON.stringify(userData));
+  };
+  
+  // Update user data when profile changes
+  const updateUser = (updatedData) => {
+    const newUserData = { ...user, ...updatedData };
+    setUser(newUserData);
+    localStorage.setItem('joblink-user', JSON.stringify(newUserData));
   };
   
   const handleLogout = async () => {
@@ -84,11 +97,11 @@ function App() {
             />
             <Route 
               path="/profile" 
-              element={user && user.type === 'seeker' ? <ProfilePage user={user} /> : <Navigate to="/login" />} 
+              element={user && user.type === 'seeker' ? <ProfilePage user={user} updateUser={updateUser} /> : <Navigate to="/login" />} 
             />
             <Route 
               path="/jobs" 
-              element={user ? <JobListingsPage user={user} /> : <Navigate to="/login" />} 
+              element={user ? <JobListingsPage user={user} updateUser={updateUser} /> : <Navigate to="/login" />} 
             />
             <Route 
               path="/dashboard" 
@@ -96,7 +109,11 @@ function App() {
             />
             <Route 
               path="/applications" 
-              element={user && user.type === 'seeker' ? <ApplicationsPage user={user} /> : <Navigate to="/login" />} 
+              element={user && user.type === 'seeker' ? <ApplicationsPage user={user} updateUser={updateUser} /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/community" 
+              element={user ? <CommunityPage user={user} /> : <Navigate to="/login" />} 
             />
           </Routes>
         </div>

@@ -1,5 +1,6 @@
 import React, { useState, useRef } from 'react';
 import { uploadProfileImage } from '../services/storageService';
+import LoadingSpinner from './LoadingSpinner';
 
 const ImageUpload = ({ userId, currentImage, onImageUploaded }) => {
   const [uploading, setUploading] = useState(false);
@@ -67,7 +68,7 @@ const ImageUpload = ({ userId, currentImage, onImageUploaded }) => {
         )}
         {uploading && (
           <div className="upload-overlay">
-            <span>Uploading...</span>
+            <LoadingSpinner size="small" text="" />
           </div>
         )}
       </div>
@@ -78,7 +79,14 @@ const ImageUpload = ({ userId, currentImage, onImageUploaded }) => {
         disabled={uploading}
         className="upload-btn"
       >
-        {uploading ? 'Uploading...' : 'Change Photo'}
+        {uploading ? (
+          <>
+            <LoadingSpinner size="small" text="" />
+            Uploading...
+          </>
+        ) : (
+          'Change Photo'
+        )}
       </button>
     </div>
   );

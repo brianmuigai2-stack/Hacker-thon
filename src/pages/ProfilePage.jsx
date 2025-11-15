@@ -2,7 +2,7 @@ import React from 'react';
 import ProfileForm from '../components/ProfileForm';
 import '../styles/profile.css';
 
-const ProfilePage = ({ user }) => {
+const ProfilePage = ({ user, updateUser }) => {
   return (
     <div className="profile-page">
       <div className="profile-container">
@@ -11,7 +11,7 @@ const ProfilePage = ({ user }) => {
           <p>Keep your information up-to-date to help employers find you</p>
         </div>
 
-        <ProfileForm user={user} />
+        <ProfileForm user={user} updateUser={updateUser} />
 
         <div className="profile-tips">
           <h3> Profile Tips</h3>

@@ -33,6 +33,7 @@ const Navbar = ({ user, onLogout }) => {
                     <Link to="/jobs" className="nav-link">Find Jobs</Link>
                     <Link to="/applications" className="nav-link">My Applications</Link>
                     <Link to="/profile" className="nav-link">My Profile</Link>
+                    <Link to="/community" className="nav-link">Community</Link>
                     <button 
                       className="nav-link notification-btn"
                       onClick={() => setShowNotifications(!showNotifications)}
@@ -46,6 +47,7 @@ const Navbar = ({ user, onLogout }) => {
                   <>
                     <Link to="/dashboard" className="nav-link">Dashboard</Link>
                     <Link to="/jobs" className="nav-link">View Jobs</Link>
+                    <Link to="/community" className="nav-link">Community</Link>
                   </>
                 )}
                 <span className="nav-username">Hi, {user.name}</span>

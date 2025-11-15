@@ -1,28 +1,27 @@
-import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { doc, updateDoc } from 'firebase/firestore';
-import { storage, db } from '../firebase';
+import { db } from '../firebase';
 
 export const uploadProfileImage = async (userId, file) => {
   try {
-    // Create a reference to the storage location
-    const storageRef = ref(storage, `profile-images/${userId}/${Date.now()}_${file.name}`);
-    
-    // Upload the file
-    const snapshot = await uploadBytes(storageRef, file);
-    
-    // Get the download URL
-    const downloadURL = await getDownloadURL(snapshot.ref);
-    
-    // Update user document with the image URL
+    // Convert image to base64 and store in Firestore
+    const base64 = await convertToBase64(file);
     const userRef = doc(db, 'users', userId);
     await updateDoc(userRef, {
-      profileImage: downloadURL,
+      profileImage: base64,
       updatedAt: new Date()
     });
-    
-    return downloadURL;
+    return base64;
   } catch (error) {
     console.error('Error uploading image:', error);
-    throw error;
+    throw new Error('Image upload failed. Please try again.');
   }
+};
+
+const convertToBase64 = (file) => {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
 };
