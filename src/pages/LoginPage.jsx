@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { signIn, signInWithGoogle, resetPassword } from '../services/authService';
+import { signIn, signInWithGoogle, handleGoogleRedirectResult, resetPassword } from '../services/authService';
 import { validateEmailStrength } from '../utils/emailValidator';
 import '../styles/auth.css';
 
@@ -37,13 +37,27 @@ const LoginPage = ({ onLogin }) => {
 
   const handleGoogleSignIn = async () => {
     try {
-      const user = await signInWithGoogle(userType);
-      onLogin(user);
-      navigate(userType === 'seeker' ? '/jobs' : '/dashboard');
+      await signInWithGoogle(userType);
     } catch (error) {
       alert('Google sign-in failed: ' + error.message);
     }
   };
+
+  React.useEffect(() => {
+    const handleRedirect = async () => {
+      try {
+        const user = await handleGoogleRedirectResult();
+        if (user) {
+          onLogin(user);
+          navigate(user.type === 'seeker' ? '/jobs' : '/dashboard');
+        }
+      } catch (error) {
+        console.error('Google redirect error:', error);
+        alert('Google sign-in failed: ' + error.message);
+      }
+    };
+    handleRedirect();
+  }, []);
 
   const handleForgotPassword = async (e) => {
     e.preventDefault();
