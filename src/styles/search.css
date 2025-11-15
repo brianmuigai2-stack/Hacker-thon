@@ -29,10 +29,21 @@
   cursor: pointer;
 }
 
-.filters-row {
+.search-header {
+  margin-bottom: 20px;
+}
+
+.results-count {
+  color: #6b7280;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.filters-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 15px;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-top: 15px;
 }
 
 .filters-row select,

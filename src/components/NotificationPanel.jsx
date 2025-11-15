@@ -19,16 +19,7 @@ const NotificationsPanel = ({ userId, isOpen, onClose }) => {
       const notifs = await getUserNotifications(userId);
       console.log('Notifications loaded in panel:', notifs);
       
-      // Log each notification's additionalMessage specifically
-      notifs.forEach((notif, index) => {
-        console.log(`Notification ${index + 1}:`, {
-          id: notif.id,
-          title: notif.title,
-          hasAdditionalMessage: !!notif.additionalMessage,
-          additionalMessage: notif.additionalMessage,
-          additionalMessageLength: notif.additionalMessage ? notif.additionalMessage.length : 0
-        });
-      });
+
       
       setNotifications(notifs);
     } catch (error) {
@@ -66,15 +57,11 @@ const NotificationsPanel = ({ userId, isOpen, onClose }) => {
           ) : notifications.length > 0 ? (
             notifications.map(notif => {
               // Debug each notification as it renders
-              const hasMessage = notif.additionalMessage && 
-                                 notif.additionalMessage !== '' && 
-                                 notif.additionalMessage.trim() !== '';
+              const hasAdditionalMessage = notif.additionalMessage && 
+                                          notif.additionalMessage !== '' && 
+                                          notif.additionalMessage.trim() !== '';
               
-              console.log(`Rendering notification ${notif.id}:`, {
-                hasMessage,
-                message: notif.additionalMessage,
-                messageLength: notif.additionalMessage ? notif.additionalMessage.length : 0
-              });
+
               
               return (
                 <div 
@@ -91,25 +78,10 @@ const NotificationsPanel = ({ userId, isOpen, onClose }) => {
                     <p className="notif-message">{notif.message || 'You have a new notification'}</p>
                     
                     {/* Show additional message if it exists and is not empty */}
-                    {hasMessage && (
+                    {hasAdditionalMessage && (
                       <div className="additional-message">
                         <strong>Message from organization:</strong>
                         <p className="org-message">{notif.additionalMessage}</p>
-                      </div>
-                    )}
-                    
-                    {/* Debug display - remove after testing */}
-                    {process.env.NODE_ENV === 'development' && (
-                      <div style={{ 
-                        fontSize: '0.7rem', 
-                        color: '#999', 
-                        marginTop: '0.5rem',
-                        padding: '0.25rem',
-                        background: '#f0f0f0',
-                        borderRadius: '4px'
-                      }}>
-                        Debug: hasMessage={String(hasMessage)}, 
-                        length={notif.additionalMessage ? notif.additionalMessage.length : 0}
                       </div>
                     )}
                     

@@ -40,7 +40,7 @@ const JobListingsPage = ({ user }) => {
           <p>{jobs.length} jobs available</p>
         </div>
 
-        <JobSearch onSearch={handleSearch} />
+        <JobSearch onSearch={handleSearch} jobCount={jobs.length} />
 
         <div className="jobs-grid">
           {jobs.length > 0 ? (
