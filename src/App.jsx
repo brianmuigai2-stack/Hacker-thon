@@ -14,6 +14,7 @@ import OrganisationDashboard from './pages/OrganisationDashboard';
 import ApplicationsPage from './pages/ApplicationsPage';
 import CommunityPage from './pages/CommunityPage';
 import LoadingSpinner from './components/LoadingSpinner';
+import FloatingAI from './components/FloatingAI';
 import './App.css';
 
 function App() {
@@ -116,6 +117,7 @@ function App() {
               element={user ? <CommunityPage user={user} /> : <Navigate to="/login" />} 
             />
           </Routes>
+          <FloatingAI user={user} />
         </div>
       </Router>
     </ThemeProvider>

@@ -1,5 +1,6 @@
 import React from 'react';
 import ProfileForm from '../components/ProfileForm';
+import AIRecommendations from '../components/AIRecommendations';
 import '../styles/profile.css';
 
 const ProfilePage = ({ user, updateUser }) => {
@@ -12,6 +13,10 @@ const ProfilePage = ({ user, updateUser }) => {
         </div>
 
         <ProfileForm user={user} updateUser={updateUser} />
+
+        {user.type === 'seeker' && (
+          <AIRecommendations user={user} />
+        )}
 
         <div className="profile-tips">
           <h3> Profile Tips</h3>
