@@ -345,3 +345,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 ---
 
 **KaziConnect** — _Empowering Kenyan Youth Through Opportunity_
+
+
+
+## Needed  changes by updating backend and removing the mongoDB for database
