@@ -117,7 +117,7 @@ function App() {
               element={user ? <CommunityPage user={user} /> : <Navigate to="/login" />} 
             />
           </Routes>
-          <FloatingAI user={user} />
+          <FloatingAI user={user} updateUser={updateUser} />
         </div>
       </Router>
     </ThemeProvider>
